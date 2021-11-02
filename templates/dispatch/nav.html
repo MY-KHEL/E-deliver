@@ -1,0 +1,99 @@
+{% load static %}
+
+<nav class="side-navbar">
+  <div class="side-navbar-wrapper">
+    <!-- Sidebar Header    -->
+    <div class="sidenav-header d-flex align-items-center justify-content-center">
+      <!-- User Info-->
+      <div class="sidenav-header-inner text-center">
+                 {% if user.image %}
+          <img src="{{user.image.url}}" class="img-fluid rounded-circle">
+          {% else %}
+          <i class="fa fa-user-circle icon" aria-hidden="true"></i>
+        {% endif %}
+            <h2 class="h5">{{user.username}}</h2>
+          </div>
+
+      <!-- Small Brand information, appears on minimized sidebar-->
+      <div class="sidenav-header-logo"><a href="." class="brand-small text-center"> <strong>E</strong><strong
+            class="text-secondary">D</strong></a></div>
+    </div>
+    <!-- Sidebar Navigation Menus-->
+    <div class="main-menu">
+      <h5 class="sidenav-heading">Main</h5>
+      <ul id="side-main-menu" class="side-menu list-unstyled">
+        <li><a href="{% url 'decide' %}"> <i class="icon-home"></i>Home </a></li>
+        <li> <a href="{% url 'dispatch_mail' %}"> <i class="icon-mail"></i>Mails in
+            <div class="badge badge-danger " style="font-size: .7rem;"> {{yet_delivered_count}} Unassigned</div>
+          </a></li>
+
+        <li><a href="charts.html"><i class="fa fa-clock-o" aria-hidden="true"></i> Delivery History </a></li>
+        <li><a href="tables.html"> <i class="icon-grid"></i>Tables </a></li>
+
+        <li><a href="login.html"> <i class="icon-interface-windows"></i>Login page </a></li>
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+<div class="page">
+
+  <nav class="navbar">
+
+    <div class="container-fluid">
+      <div class="navbar-holder d-flex align-items-center justify-content-between">
+        <div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn"><i class="icon-bars"> </i></a><a
+            href="." class="navbar-brand">
+            <div class="brand-text d-none d-md-inline-block"><span>E </span><strong class="text-primary">
+                DELIVER</strong> <span class="mx-auto">DISPATCH PAGE</span></div>
+          </a></div>
+        <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+
+          <ul aria-labelledby="notifications" class="dropdown-menu">
+            <li><a rel="nofollow" href="#" class="dropdown-item d-flex">
+                <div class="msg-profile"> <img src="{% static 'img/avatar-1.jpg' %}" alt="..."
+                    class="img-fluid rounded-circle"></div>
+                <div class="msg-body">
+                  <h3 class="h5">Jason Doe</h3><span>sent you a direct message</span><small>3 days ago at 7:58 pm -
+                    10.06.2014</small>
+                </div>
+              </a></li>
+            <li><a rel="nofollow" href="#" class="dropdown-item d-flex">
+                <div class="msg-profile"> <img src="{% static 'img/avatar-2.jpg' %}" alt="..."
+                    class="img-fluid rounded-circle"></div>
+                <div class="msg-body">
+                  <h3 class="h5">Frank Williams</h3><span>sent you a direct message</span><small>3 days ago at 7:58 pm -
+                    10.06.2014</small>
+                </div>
+              </a></li>
+            <li><a rel="nofollow" href="#" class="dropdown-item d-flex">
+                <div class="msg-profile"> <img src="{% static 'img/avatar-3.jpg' %}" alt="..."
+                    class="img-fluid rounded-circle"></div>
+                <div class="msg-body">
+                  <h3 class="h5">Ashley Wood</h3><span>sent you a direct message</span><small>3 days ago at 7:58 pm -
+                    10.06.2014</small>
+                </div>
+              </a></li>
+            <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong> <i
+                    class="fa fa-envelope"></i>Read all messages </strong></a></li>
+          </ul>
+          </li>
+          <li class="nav-item dropdown"><a id="profile" rel="nofollow" data-target="#" href="#" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><span class="">{{user.username| capfirst}}</span></a>
+
+            <ul aria-labelledby="profile" class="dropdown-menu">
+
+              <li class=""><a href="{% url 'update_profile' user.id  %}" class="dropdown-item "> <span class=""> <i
+                      class="fa fa-user    "></i> Update Profile</span></a></li>
+
+              <li class=""><a href="{% url 'logout' %}" class="dropdown-item logout"> <span class="">Logout</span><i
+                    class="fa fa-sign-out"></i></a></li>
+            </ul>
+          </li>
+          <!-- Log out-->
+
+        </ul>
+      </div>
+    </div>
+  </nav>

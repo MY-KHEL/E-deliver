@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include "nav.html" %}
+<style>
+    body{
+        background-color: #f4f7fa;
+    }
+</style>
+<div class="container py-4">
+    <h1 class="text-center text-uppercase"> Complaints </h1>
+    <div class="col-lg-6 mx-auto mt-4">
+        <div class="card p-2">
+            <div class="card-body">
+                <p><span class="title">Full Name:</span> {{comments.first_name}} {{comments.last_name}} </p>
+                <p><span class="title">Email Address:</span> {{comments.email}} </p>
+                <p><span class="title">Complaint:</span> {{comments.complaint}} </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

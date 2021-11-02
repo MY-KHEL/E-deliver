@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    body{
+        background-color: #F4F7FA;
+    }
+    ul.errorlist li::marker{
+     visibility:hidden;
+    }
+
+    ul.errorlist{
+      background-color:pink;
+      border:3px crimson solid;
+    }
+    a.pickup{
+      color: black;
+    }
+</style>
+
+
+<div class="container">
+    <div class="row">
+        
+           
+            <div class="col-lg-6 mx-auto mt-5">
+                <div class="card">
+                  <div class="card-header d-flex align-items-center">
+                    <h4 class="text-center">Login Page</h4>
+                  </div>
+                
+                  <div class="card-body">
+                      <!-- <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong></strong> 
+                      </div> -->
+                      
+                      <script>
+                        $(".alert").alert();
+                      </script>
+                    
+                    <form method="POST">
+                      <!-- <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="Email Address" class="form-control">
+                      </div>
+                      <div class="form-group">       
+                        <label>Password</label>
+                        <input type="password" placeholder="Password" class="form-control">
+                      </div> -->
+                      <div class="form-group">
+                        {% csrf_token %}
+                          {{form}}
+                      </div>
+                      <div class="form-group">       
+                        <button type="submit" class="btn btn-primary"> Log In </button>
+                      </div>
+                    </form>
+                   
+                  </div>
+                </div>
+              </div>
+           
+      
+    </div>
+</div>
+<script>
+    var form_field = document.getElementsByTagName('input')
+
+    for(var form in form_field){
+        form_field[form].className = "form-control"
+    }
+</script>
+{% endblock content %}

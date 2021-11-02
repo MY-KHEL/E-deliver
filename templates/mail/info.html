@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    body{
+        background-color: #f4f7fa;
+    }
+    li{
+        line-height: 2.7rem;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6 mx-auto">
+            <div class="card mt-4">
+                <div class="card-header">
+                    MAIL INFORMATION
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>Sender's Full Name :{{mail.mail.first_name}} {{mail.mail.last_name}}</li>
+                        <li>Sender's Phone Number :{{mail.mail.Phone_Number}}</li>
+                        {% if mail.mail.Sender_Address %}
+                          
+                        <li>Sender's Phone Number :{{mail.mail.Sender_Address}}</li>
+                        {% endif %}
+                        
+                        <li>Receivers's Full Name :{{mail.mail.recipent_first_name}} {{mail.mail.recipent_last_name}}</li>
+                        <li>Receivers's Phone Number :{{mail.mail.recipent_phone_number}} </li>
+                        <li>Mail Registration Date :{{mail.mail.timestamp}} </li>
+                        <li>Mail Delivery Date :{{mail.date}} </li>
+                        <li>Mail Status :{{mail.mail.status}} </li>
+                        <li>Delivered by:{{dispatch.riderid.first_name}} {{dispatch.riderid.last_name}} ({{dispatch.riderid.username}})</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    *{
+        padding: 0%;
+        margin: 0%;
+        box-sizing: border-box;
+    }
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.3rem;
+    }
+    form a{
+        font-size: 1.9rem;
+    }
+    .first_para{
+        font-size: 3.7rem;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    header{
+        border-bottom-right-radius: 20%;
+       
+    }
+li{
+    list-style-type: none;
+}
+.comments{
+    position: fixed;
+    bottom: 3rem;
+    right: 1rem;
+}
+  @media (max-width: 567px){
+    .first_para{
+        font-size: 2.7rem;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+  }
+</style>
+  <div class=" ">
+    <header style="background-color: #f4f7fa;" >
+        <nav class="navbar navbar-expand-sm px-2 container" style="background-color: transparent;">
+            <h3 class="navbar-brand text-black text-uppercase text-primary " style="font-family: Georgia, 'Times New Roman', Times, serif;" href="#">E-deliver</h3>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars" aria-hidden="true"></i></button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+              
+                <form class="form-inline my-2 my-lg-0 ml-auto mr-4">
+                   
+                  <a name="" id="" class="btn btn-success rounded-lg mx-sm-4" href="{% url 'pickupservice' %}" role="button">Pick up Service</a>
+                   <a name="" id="" class="btn btn-dark rounded-lg mx-4 my-2 my-sm-0" href="{% url 'login' %}" role="button">Login</a>
+                </form>
+            </div>
+        </nav>
+       
+        <div class="container">
+            <div class="row">           
+            <div class="col-md-7 my-5 ">
+          <p class="first_para text-success "> <span>E-Deliver </span> is a courier service that delivers mail within 24 hours. </p>  </div>
+           <div class="col-md-5 mb-4"><img src="{% static 'img/amico.png' %} " alt="" class="w-100"></div> </div>
+       
+        </div>
+        <div class="comments"  title="Enter your comments or complaints"  style="z-index: 12;">
+            <a href="{% url 'comments' %}"><i class="fa fa-commenting fa-3x"  title="Enter your comments or complaints" ></i></a>
+        </div>
+    </header>
+    <main class="container mt-5">
+        <div class="text-center"> <h3 class="text-center text-primary text-uppercase" style="font-family: Georgia, 'Times New Roman', Times, serif;">Who We Are </h3></div>
+
+        <div class="row mt-4 mb-0">
+            <div class="col-md-6"><img src="{% static 'img/rafiki.png' %} " alt="" class="w-100"></div>
+            <div class="col-md-6 mt-4">
+                E-deliver is a courier service that works in Lagos , Nigeria.
+                It has over 300 dispatch riders and it has gotten a lot of reputation to itself as it holds as the best courier service in Lagos.
+                <br>
+                We are always quick to deliver , as we deliver your products within 24hrs. We also have the PICKUP SERVICE, where we can come to pick the mail and deliver to your destination.
+                <br>
+                <div class="text-right">
+                <a name="" id="" class="btn btn-primary rounded-lg mt-4 mb-2  " href="{% url 'pickupservice' %}" role="button">Pickup Service</a></div>
+            </div>
+          
+        </div>
+    
+    </main>
+
+    <footer style="background-color: #f4f7fa; border-top-left-radius: 0%;" class="px-2 py-2">
+        <div class="container-fluid">
+      
+        <div class="row">
+            <div class="col-lg-6 mt-3">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d44833.519232137165!2d3.282870117548323!3d6.676544362038764!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b96e1a64b920d%3A0x154722f66d861d10!2s18%20Olubukola%20Street%2C%20Ifako-Ijaiye%20101232%2C%20Lagos!5e0!3m2!1sen!2sng!4v1634167765297!5m2!1sen!2sng" width="600" height="350" style="border:0;" allowfullscreen="" loading="lazy" class="w-100"></iframe>
+            </div>
+            <div class="col-lg-6 text-right mt-4">
+                <h3 class="text-center text-primary  text-uppercase " style="font-family: Georgia, 'Times New Roman', Times, serif;"> Contact Us</h3>
+              
+            </div>
+        </div>      
+        </div>
+    </footer>
+  </div>
+
+{% endblock content %}

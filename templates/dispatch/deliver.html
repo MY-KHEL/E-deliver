@@ -1,0 +1,54 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block content %}
+
+<style>
+    body{
+        background-color: #F4F7FA;
+    }
+   label:nth-of-type(4){
+      display:none
+   }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="mx-auto">
+            <div class="card mt-5 shadow">
+                <div class="card-header d-flex align-items-center">
+                  <h4>RECEIVER'S INFORMATION </h4>
+                </div>
+                <div class="card-body">
+                  <p class="text-muted text-danger"> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Kindly bear in mind that this mail belongs to {{mail.recipent_first_name}} {{mail.recipent_last_name}} .</p>
+                  <form method="POST">
+                    <div class="form-group">
+                     {% csrf_token %}
+                     {{form}}
+                    </div>
+                    <div class="form-group">       
+                    <button class="btn btn-secondary"> Confirm Delivery </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var form_field = document.getElementsByTagName('input')
+
+    for(var form in form_field){
+        form_field[form].className = "form-control"
+    }
+
+  var form_field2 = document.getElementsByTagName('select')
+
+  for(var form in form_field2){
+      form_field2[form].className = "form-control d-none"
+      
+  }
+
+</script>
+
+{% endblock content %}

@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+{% include "nav.html" %}
+<section class="dashboard-counts section-padding">
+    <div class="container-fluid">
+        <!-- <div class="row"> -->
+        <div class="card-deck">
+            <!-- Count item widget-->
+            <div class="  card  bg-white shadow p-3">
+                <div class="wrapper count-title d-flex">
+                    <div class="icon"><i class="icon-padnote"></i></div>
+                    <div class="name"><strong class="text-uppercase">mails REGISTERED </strong>
+                        <div class="count-number">{{mail_list_count}}</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Count item widget-->
+            <div class="  card  bg-white shadow p-3">
+                <div class="wrapper count-title d-flex">
+                    <div class="icon"><i class="icon-list"></i></div>
+                    <div class="name"><strong class="text-uppercase">Mails assigned</strong>
+                        <div class="count-number">{{mail_assigned_count}}</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Count item widget-->
+            <div class="  card bg-white shadow p-3">
+                <div class="wrapper count-title d-flex">
+                    <div class="icon"><i class="icon-list-1"></i></div>
+                    <div class="name"><strong class="text-uppercase">mails delivered</strong>
+                        <div class="count-number">{{mail_delivered_count}}</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+
+        <div class="row">
+
+        <div class="col-lg-6 p-3 mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Latest Mail Received</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Mail Id</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for mail in mail_list2  %}
+                                <tr>
+                                    <th scope="row">{{mail.id}}</th>
+                                    <td>{{mail.first_name}}</td>
+                                    <td>{{mail.last_name}}</td>
+                                    <td><a name="" id="" class="btn btn-success" href="{% url 'assign' mail.id %}" role="button">Assign <i class="fa fa-long-arrow-right  "></i> </a></td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                <td>
+                                NO  MAIL
+                                </td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 p-3 mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Latest Mail Delivered</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Mail Id</th>
+                                    <th>Recipent First Name</th>
+                                    <th>Recipent Last Name</th>
+                                    <th>Phone Number</th>
+                                    <th>time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for item  in mail_delivered %}
+                            
+                                <tr>
+                                    <th scope="row">{{item.mail.id}}</th>
+                                    <td><a href="{% url 'mailinfo' item.mail.id %}">{{item.receiver_first_name}}</a></td>
+                                    <td>{{item.receiver_last_name}}</td>
+                                    <td>{{item.receiver_phone_number}}</td>
+                                    <td>{{item.date |time }}</td>
+                                </tr>
+
+                               {% endfor %}
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+
+    <!-- </div> -->
+</section>
+
+
+{% endblock content %}

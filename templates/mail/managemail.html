@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  body {
+    background-color: #F4F7FA;
+  }
+.step-links a{
+  color:black;
+  border:2px solid #6c757d;
+  background-color:#f8f9fa;
+  padding:.4rem;
+  border-radius:10px;
+}
+span.current{
+  border-radius:50%;
+}
+</style>
+{% include "nav.html" %}
+<div class="container-fluid">
+  <!-- Page Header-->
+
+  <div class="row">
+    <div class="col-lg-6 mx-auto">
+
+      <div class="card mt-4">
+        <div class="card-header py-1 text-center">
+          Total Mails Registered
+        </div>
+        <div class="card-body">
+          <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search First Name">
+          <div class="table-responsive ">
+
+
+            <table class="table" id="myTable">
+
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Sender First Name</th>
+                  <th>Sender Last Name</th>
+                  
+                  <th>Status</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in page_obj %}
+
+                <tr>
+                  <th scope="row">{{item.id}}</th>
+                  <td>{{item.first_name}}</td>
+                  <td>{{item.last_name}}</td>
+                  <td>{{item.status}}</td>
+                </tr>
+                {% endfor %}
+          
+              </tbody>
+            </table>
+           
+
+          </div>
+        </div>
+     
+       <div class="mx-auto mb-2">
+                    <div class="pagination ">
+                  <span class="step-links ">
+                      {% if page_obj.has_previous %}
+                          <a href="?page=1"><i class="fa fa-chevron-left" aria-hidden="true"></i><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+                          <a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+                      {% endif %}
+              
+                      <span class="current bg-light border p-2">
+                           {{ page_obj.number }}
+                      </span>
+              
+                      {% if page_obj.has_next %}
+                          <a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                          <a href="?page={{ page_obj.paginator.num_pages }}"><i class="fa fa-chevron-right" aria-hidden="true"></i><i class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                      {% endif %}
+                  </span>
+              </div>
+         </div>    
+    </div>
+</div>
+
+
+
+
+
+
+    <div class="col-lg-6 mx-auto">
+
+      <div class="card mt-4">
+        <div class="card-header py-1 text-center">
+          Change Dispatch
+        </div>
+        <div class="card-body">
+           <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search First Name">
+          <div class="table-responsive ">
+
+            <table class="table">
+
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Sender First Name</th>
+                  <th>Sender Last Name</th>
+                  <th>Dispatch</th>
+                  <th>Reassign</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in mail %}
+
+                <tr>
+                  <th scope="row">{{item.mailid.id}}</th>
+                  <td>{{item.mailid.first_name}}</td>
+                  <td>{{item.mailid.last_name}}</td>
+                  <td>{{item.riderid.username}}</td>
+                  <td><a name="" id="" class="btn btn-primary" href="{% url 'reassign' item.mailid.id %}"
+                      role="button"><i class="fa fa-undo" aria-hidden="true"></i></a></td>
+
+                </tr>
+                {% endfor %}
+
+        
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function myFunction() {
+    // Declare variables
+    var input, filter, table, tr, td, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+  var form_field = document.getElementsByTagName('input')
+
+  for (var form in form_field) {
+    form_field[form].className = "form-control mt-0 mb-2 border-info "
+  }
+</script>
+
+{% endblock content %}

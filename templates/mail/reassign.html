@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    body{
+        background-color: #F4F7FA;
+    }
+    form label{
+      font-size: 1.4rem;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6 mx-auto">
+          <div class="card mt-5">
+        
+            <div class="card-body">
+              <p class="text-danger"> Are you Sure you want to Withdraw {{mail.mailid.first_name}} {{mail.mailid.last_name}}'s Mail from {{mail.riderid.username}}</p>
+              <form method="POST">
+                {% csrf_token %}
+                {{form}}
+                <br>
+               <button class="btn btn-primary">Yes</button> 
+               <a name="" id="" class="btn btn-secondary" href="{% url 'managemail' %}"   role="button">No</a>
+              </form>
+           
+            </div>
+          </div>
+        </div>
+</div>
+<script>
+  var form_field = document.getElementsByTagName('select')
+
+  for(var form in form_field){
+      form_field[form].className = "form-control"
+  }
+</script>
+{% endblock content %}

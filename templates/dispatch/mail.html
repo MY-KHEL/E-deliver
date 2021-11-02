@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% include 'dispatch/nav.html' %}
+<style>
+    .inbox{
+         overflow: auto;
+         height: 90vh;
+    
+    }
+    .inbox a{
+        color: black;
+    }
+    .inbox a:hover{
+        text-decoration: none;
+        color: black;
+    }
+    .avtr{
+        border: grey solid 2px;
+        border-radius: 50%;
+    }
+</style>
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-md-3 bg-white p-3 inbox shadow">         
+
+            {% for item in get_mail  %}
+             <a href="{% url 'read_mail' rider.id item.mailid.id %}">
+              <div class="row "> <div class="col-3 border-right text-center"><div class="mx-auto">
+               <span class="text-danger"> {{item.mailid.first_name | slice:1 |capfirst}}{{item.mailid.last_name |slice:1 |capfirst }}</span>
+            </div></div>
+             <div class="col-9">
+                 
+            {% if item.status == 'Delivered' %}
+           Good day,<span class="text-danger"></span> {{rider.username}}, the mail of <span class="text-primary">
+                {{item.mailid.first_name|lower|capfirst}} {{item.mailid.last_name |lower|capfirst}}</span> has been successfully delivered.
+            {% else %}
+           
+                Good day,<span class="text-danger"></span> {{rider.username}}, the mail of <span class="text-primary">
+                {{item.mailid.first_name|lower|capfirst}} {{item.mailid.last_name |lower|capfirst}}</span> has been assigned to you.
+            {% endif %}
+                <div class="text-muted" style="font-size: 0.7rem;" >
+                    {{item.timestamp }}
+                    <br>
+                      {% if item.status == 'Delivered' %}
+                        <span class="text-success"> <i class="fa fa-check-circle" aria-hidden="true"></i> Mail Status: {{item.status}}</span>
+                        {% else %}
+                        <span class="text-danger"> <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Mail Status: {{item.status}}</span> 
+                        
+                        {% endif %}
+                </div>
+                
+            </div></div>
+          <hr>
+     </a>
+      
+          {% endfor %} 
+   
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-8 d-none d-md-block bg-white p-3 inbox">
+            {% for item in get_last_mail  %}
+            <address class="text-right">
+                From:
+                <!-- {{item.mailid.first_name|lower|capfirst}} {{item.mailid.last_name |lower|capfirst}} -->admin
+          </address>
+        <address>
+            To:
+            {{item.riderid.first_name|lower|capfirst}} {{item.riderid.last_name |lower|capfirst}}
+            <div class="text-muted">
+                {{item.timestamp}}
+            </div>
+        </address>
+        <hr>
+        <h3 class="title text-center ">ASSIGNMENT OF MAIL </h3>
+           
+            {% if item.status  == 'Delivered' %}
+            The mail of <strong>{{item.mailid.first_name | upper}}
+                {{item.mailid.last_name | upper}}</strong>  has been successfully delivered .
+            <div id="accordianId" role="tablist" aria-multiselectable="true" class="mt-4 ">
+                <div class="card ">
+                    <div class="card-header bg-primary" role="tab" id="section1HeaderId">
+                        <h5 class="mb-0">
+                            <a data-toggle="collapse" data-parent="#accordianId" href="#section1ContentId" aria-expanded="true" aria-controls="section1ContentId" class="text-black">
+                      Mail Information <i class="fa fa-arrow-down    "></i>
+                    </a>
+                        </h5>
+                    </div>
+                    <div id="section1ContentId" class="collapse in" role="tabpanel" aria-labelledby="section1HeaderId">
+                        <div class="card-body bg-light">
+                            <ul>
+                                
+                                <li>Sender Phone: {{item.mailid.Phone_Number}}</li>
+                                  {% if item.mailid.Sender_Address  %}
+                                          
+                                           <li>Sender Address: {{item.mailid.Sender_Address }}</li>
+                                          {% endif %}
+                                       
+                                <li>Recipent First Name : {{item.mailid.recipent_first_name}}</li>
+                                <li>Recipent Last Name: {{item.mailid.recipent_last_name}}</li>
+                                <li>Recipent Phone Number : {{item.mailid.recipent_phone_number}}</li>
+                                <li>Mail Destination : {{item.mailid.Address}}</li>
+                                
+                            </ul>
+                           
+                          
+                        </div>
+                    </div>
+                </div>
+             
+            </div>
+           
+            <address class="text-right">
+                Thanks <br>
+                {{item.riderid.username}}
+            </address>
+            {% else %}
+         
+    Good day <span class="text-primary">{{item.riderid.username}}</span> , the mail of <strong>{{item.mailid.first_name | upper}}
+        {{item.mailid.last_name | upper}}</strong> has
+    been assigned to you. Kindly {% if item.mailid.Sender_Address  %} go to the sender's Address to pick this mail. 
+    <div class="text-info">Check Sender Address in the Mail Information</div>
+                                          {% else %} come to the Supervisors desk to pick the mail
+                                          {% endif %}
+
+    <div id="accordianId" role="tablist" aria-multiselectable="true" class="mt-4 ">
+        <div class="card ">
+            <div class="card-header bg-primary" role="tab" id="section1HeaderId">
+                <h5 class="mb-0">
+                    <a data-toggle="collapse" data-parent="#accordianId" href="#section1ContentId" aria-expanded="true" aria-controls="section1ContentId" class="text-black">
+              Mail Information <i class="fa fa-arrow-down    "></i>
+            </a>
+                </h5>
+            </div>
+            <div id="section1ContentId" class="collapse in" role="tabpanel" aria-labelledby="section1HeaderId">
+                <div class="card-body bg-light">
+                    <ul>
+                        
+                        <li>Sender Phone: {{item.mailid.Phone_Number}}</li>
+                           {% if item.mailid.Sender_Address  %}
+                                        
+                                        <li>Sender Address: {{item.mailid.Sender_Address }}</li>
+                                        {% endif %}
+                                        
+                        <li>Recipent First Name : {{item.mailid.recipent_first_name}}</li>
+                        <li>Recipent Last Name: {{item.mailid.recipent_last_name}}</li>
+                        <li>Recipent Phone Number : {{item.mailid.recipent_phone_number}}</li>
+                        <li>Mail Destination : {{item.mailid.Address}}</li>
+                        
+                    </ul>
+                   
+                  
+                </div>
+            </div>
+           
+            
+        </div>
+     <a href="{% url 'read_mail' rider.id item.mailid.id %}"> <button class="mt-4 btn btn-secondary">Click Here To Deliver </button></a>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    <script>
+
+var myVar = setInterval(myTimer, 120000);
+
+function myTimer() {
+          location.reload(true);
+        }
+      </script>
+{% endblock content %}

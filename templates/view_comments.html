@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include "nav.html" %}
+<style>
+    body{
+        background-color: #f4f7fa;
+    }
+</style>
+
+<div class="container">
+    <div class="col-lg-6 mx-auto mt-5">
+        <div class="card p-2">
+            <div class="table-responsive">
+                <table class=" table table-striped">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Username</th>
+                            <th>Complaints</th>
+                        </tr>
+                        </thead>
+                         <tbody>
+                    {% for item in page_obj  %}
+                    <tr>
+                    <td>{{item.first_name}}</td>
+                    <td>{{item.last_name}}</td>
+                    <td>{{item.email |truncatechars:10 }}</td>
+                    <td>{{item.complaint |truncatechars:10 }}</td> 
+                    <td>
+                        <a name="" id="" class="btn btn-primary" href="{{item.get_absolute_url}}" role="button">More>></a>
+                    </td>
+                </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+                
+            </div>
+            <div class="mx-auto mt-2">
+                <div class="pagination ">
+              <span class="step-links ">
+                  {% if page_obj.has_previous %}
+                      <a href="?page=1"><i class="fa fa-chevron-left" aria-hidden="true"></i><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+                      <a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+                  {% endif %}
+          
+                  <span class="current bg-light border rounded-circle p-2">
+                       {{ page_obj.number }}
+                  </span>
+          
+                  {% if page_obj.has_next %}
+                      <a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                      <a href="?page={{ page_obj.paginator.num_pages }}"><i class="fa fa-chevron-right" aria-hidden="true"></i><i class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                  {% endif %}
+              </span>
+          </div>
+     </div>    
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

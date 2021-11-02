@@ -1,0 +1,46 @@
+{% extends '../base.html' %}
+
+{% load static %}
+
+{% block content %}
+{% include 'dispatch/nav.html' %}
+
+<section class="dashboard-counts section-padding">
+    <div class="container-fluid">
+           <div class="card-deck">
+            <!-- Count item widget-->
+            <div class="  card  bg-white shadow p-3">
+                <div class="wrapper count-title d-flex">
+                    <div class="icon"><i class="icon-padnote"></i></div>
+                    <div class="name"><strong class="text-uppercase">TOTAL MAILS ASSIGNED </strong>
+                        <div class="count-number">{{get_mail_count}}</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Count item widget-->
+            <div class="  card  bg-white shadow p-3">
+                <div class="wrapper count-title d-flex">
+                    <div class="icon"><i class="icon-list"></i></div>
+                    <div class="name"><strong class="text-uppercase">MAILS YET TO DELIVER </strong>
+                        <div class="count-number">{{yet_delivered_count}}</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Count item widget-->
+            <div class="  card bg-white shadow p-3">
+                <div class="wrapper count-title d-flex">
+                    <div class="icon"><i class="icon-list-1"></i></div>
+                    <div class="name"><strong class="text-uppercase">MAILS DELIVERED </strong>
+                        <div class="count-number">{{delivered_count}}</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+</section>
+
+<!-- Count item widget-->
+
+{% endblock content %}

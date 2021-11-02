@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<style>
+  body{
+    background-color: #f4f7fa;
+  }
+</style>
+
+<div class="container">
+    <div class="row">
+    
+           
+            <div class="col-lg-6 mx-auto mt-5">
+                <div class="card">
+                  <div class="mx-auto">
+                      <div class="card-header d-flex">
+                    <div class="logo text-secondary"><span>E-DELIVER  </span><strong class="text-primary"> / add your mail</strong></div>
+                
+                        </div>
+                       
+                
+                  </div> 
+                  <hr>
+                  <div class="card-body">
+             
+                    <form method="POST">
+                        <div class="form-inner">
+                        <form class="text-left form-validate">
+                            {% csrf_token %}
+            
+                            {{form}}
+            
+                          <div class="form-group text-center">
+                          <button class="btn btn-primary"> Send Mail </button>
+                          </div>
+                        </form>
+                        
+                  </div>
+                </div>
+              </div> 
+            </div>
+
+    <script>
+    var form_field = document.getElementsByTagName('input')
+
+    for(var form in form_field){
+        form_field[form].className = "form-control mt-0 mb-2 "
+    }
+    var form_field2 = document.getElementsByTagName('select')
+
+    for(var form in form_field2){
+        form_field2[form].className = "form-control mt-0 mb-2 "
+    }
+</script>
+{% endblock content %}

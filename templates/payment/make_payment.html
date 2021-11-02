@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body{
+        background-color: #f4f7fa;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6 mx-auto">
+            <div class="card mt-5">
+                <div class="card-body">
+                 <h5>This Transaction cost :NGN {{payment.amount}}</h5>
+                    
+                        <script src="https://js.paystack.co/v1/inline.js"></script>
+            
+                        <button class="btn btn-success mt-3" id="django-paystack-button" onclick="payWithPayStack()"  > Make Payment</button>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function payWithPayStack(){
+        var currency ="NGN";
+        var plan = "";
+        var ref = "{{payment.ref}}";
+        var obj = {
+            key:"{{paystack_public_key}}",
+            email:'{{payment.email}}',
+            amount:'{{payment.amount_value}}',
+            ref:ref,
+            callback:function(response){
+                window.location.href = 'verify/'+ref
+
+                
+            }
+        }
+        if (Boolean(currency)){
+            obj.currency = currency.toUpperCase   
+        }
+        if (Boolean(plan)){
+            obj.plan = plan;
+        }
+        var handler = PaystackPop.setup(obj);
+        handler.openIframe(); 
+    }
+
+
+
+    var form_field = document.getElementsByTagName('input')
+
+    for(var form in form_field){
+        form_field[form].className = "form-control"
+    }
+</script>
+{% endblock content %}
